@@ -65,6 +65,10 @@
         <activity
             android:name=".SignUp"
             android:label="@string/title_activity_sign_up"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".LogIn"
+            android:label="@string/title_activity_log_in"
             android:theme="@style/AppTheme"></activity>
     </application>
 
