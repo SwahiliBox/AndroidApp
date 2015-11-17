@@ -14,6 +14,7 @@ import com.parse.ParseUser;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import ke.co.swahilibox.swahilibox.helper.PrefManager;
 
 public class LogIn extends AppCompatActivity {
 
@@ -29,11 +30,14 @@ public class LogIn extends AppCompatActivity {
     @InjectView(R.id.link_signup)
     TextView signUp;
 
+    PrefManager pref = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         ButterKnife.inject(this);
+        pref = new PrefManager(this);
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +67,7 @@ public class LogIn extends AppCompatActivity {
 //        progressDialog.setMessage("Logging you in...");
 //        progressDialog.show();
 
-        String userName = username.getText().toString();
+        final String userName = username.getText().toString();
         String _pass = password.getText().toString();
 
         ParseUser.logInInBackground(userName, _pass, new LogInCallback() {
@@ -72,6 +76,7 @@ public class LogIn extends AppCompatActivity {
                 //If user exists and authenticated send them to main
                 if (user != null) {
                     Intent intent = new Intent(LogIn.this, Main.class);
+                    pref.createLoginSession(userName);
                     startActivity(intent);
                     finish();
                 } else {

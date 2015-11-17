@@ -11,13 +11,25 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import com.parse.ParseUser;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import ke.co.swahilibox.swahilibox.adapter.MessageAdapter;
+import ke.co.swahilibox.swahilibox.helper.ParseUtil;
+import ke.co.swahilibox.swahilibox.model.Message;
 
 
 /**
  * Created by japheth on 11/15/15.
  */
 public class Main extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private static String TAG = Main.class.getSimpleName();
 
     private static final String SELECTED_ITEM_ID = "selected_item_id";
     private static final String FIRST_TIME = "first_time";
@@ -27,6 +39,10 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     private ActionBarDrawerToggle mDrawerToggle;
     private int mSelectedId;
     private boolean mUserSawDrawer = false;
+    private ListView listView;
+    private MessageAdapter adapter;
+    private List<Message> messages;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +54,25 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         mDrawer = (NavigationView) findViewById(R.id.main_drawer);
         mDrawer.setNavigationItemSelectedListener(this);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        listView = (ListView) findViewById(R.id.list_view);
+        messages = new ArrayList<>();
+        adapter = new MessageAdapter(this, messages);
+        listView.setAdapter(adapter);
+
+        Intent intent = getIntent();
+
+        ParseUser user = ParseUser.getCurrentUser();
+        String email = user.getEmail();
+
+
+        if (email != null) {
+            Log.i(TAG, "Parse user email" + user.getEmail());
+            ParseUtil.subscribeWithEmail(user.getEmail());
+        } else {
+            Log.i(TAG, "Email is null. Not subscribing to parse!");
+        }
+
         mDrawerToggle = new ActionBarDrawerToggle(this,
                 mDrawerLayout,
                 mToolbar,
@@ -108,5 +143,16 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.i("NewIntent", "Message Notification");
+        String message = intent.getStringExtra("message");
+
+        Message m = new Message(message, System.currentTimeMillis());
+        messages.add(0, m);
+        adapter.notifyDataSetChanged();
     }
 }

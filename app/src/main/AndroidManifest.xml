@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <permission android:name="ke.co.swahilibox.swahilibox.permission.CD2_MESSAGE" />
 
@@ -36,7 +37,17 @@
         <activity
             android:name=".Main"
             android:label="@string/title_activity_main"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".SignUp"
+            android:label="@string/title_activity_sign_up"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".LogIn"
+            android:label="@string/title_activity_log_in"
+            android:theme="@style/AppTheme"></activity>
 
         <service android:name="com.parse.PushService" />
 
@@ -62,14 +73,6 @@
             </intent-filter>
         </receiver>
 
-        <activity
-            android:name=".SignUp"
-            android:label="@string/title_activity_sign_up"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".LogIn"
-            android:label="@string/title_activity_log_in"
-            android:theme="@style/AppTheme"></activity>
 
     </application>
 
