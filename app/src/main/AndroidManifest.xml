@@ -70,6 +70,7 @@
             android:name=".LogIn"
             android:label="@string/title_activity_log_in"
             android:theme="@style/AppTheme"></activity>
+
     </application>
 
 </manifest>

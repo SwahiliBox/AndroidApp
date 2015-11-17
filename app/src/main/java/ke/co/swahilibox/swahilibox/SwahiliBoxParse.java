@@ -3,6 +3,9 @@ package ke.co.swahilibox.swahilibox;
 import android.app.Application;
 import android.util.Log;
 
+import com.parse.ParseACL;
+import com.parse.ParseUser;
+
 import ke.co.swahilibox.swahilibox.helper.ParseUtil;
 
 /**
@@ -27,5 +30,11 @@ public class SwahiliBoxParse extends Application {
         mInstance = this;
         //register with parse
         ParseUtil.registerParse(getApplicationContext());
+
+        ParseUser.enableAutomaticUser();
+        ParseACL defaultAcl = new ParseACL();
+
+        defaultAcl.setPublicReadAccess(true);
+        ParseACL.setDefaultACL(defaultAcl, true);
     }
 }
