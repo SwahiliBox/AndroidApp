@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="com.google.c2dm.permission.RECEIVE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
     <permission android:name="ke.co.swahilibox.swahilibox.permission.CD2_MESSAGE" />

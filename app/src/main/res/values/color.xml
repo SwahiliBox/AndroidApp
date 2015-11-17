@@ -6,4 +6,5 @@
     <color name="colorAccent">#FFEB3B</color>
     <color name="colorTextPrimary">#212121</color>
     <color name="colorTextSecondary">#727272</color>
+    <color name="colorSplash">#FFFFFF</color>
 </resources>

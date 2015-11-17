@@ -22,6 +22,7 @@ import java.util.List;
 
 import ke.co.swahilibox.swahilibox.adapter.MessageAdapter;
 import ke.co.swahilibox.swahilibox.helper.ParseUtil;
+import ke.co.swahilibox.swahilibox.helper.PrefManager;
 import ke.co.swahilibox.swahilibox.model.Message;
 
 
@@ -42,12 +43,15 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     private ListView listView;
     private MessageAdapter adapter;
     private List<Message> messages;
+    private PrefManager pref;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        pref = new PrefManager(this);
 
         mToolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(mToolbar);
@@ -110,8 +114,14 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         mDrawerLayout.closeDrawer(GravityCompat.START);
     }
 
+    //navigate the navigation view menu
     private void navigate(int mSelectedId) {
         Intent intent = null;
+        switch(mSelectedId){
+            case R.id.log_out:
+              pref.logOut();
+                finish();
+        }
     }
 
     @Override
@@ -145,6 +155,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         }
     }
 
+    //add the notification messages to a listview
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
