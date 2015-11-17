@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.parse.ParseUser;
 
@@ -44,6 +45,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     private MessageAdapter adapter;
     private List<Message> messages;
     private PrefManager pref;
+    private TextView user_name;
 
 
     @Override
@@ -55,6 +57,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         mToolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(mToolbar);
+        user_name = (TextView) findViewById(R.id.username);
         mDrawer = (NavigationView) findViewById(R.id.main_drawer);
         mDrawer.setNavigationItemSelectedListener(this);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -69,6 +72,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         ParseUser user = ParseUser.getCurrentUser();
         String email = user.getEmail();
 
+        user_name.setText(user.getUsername().toString());
 
         if (email != null) {
             Log.i(TAG, "Parse user email" + user.getEmail());

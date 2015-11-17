@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="256dp"
     android:alpha="0.8"
-    android:background="@mipmap/ic_launcher"
+    android:background="@drawable/swahilibox_splash"
     android:orientation="vertical">
 
     <TextView
@@ -13,5 +13,6 @@
         android:layout_gravity="bottom"
         android:gravity="right"
         android:padding="16dp"
+        android:id="@+id/username"
         android:text="User name" />
 </FrameLayout>
