@@ -13,10 +13,7 @@
     <!-- permission needed to check app state background / foreground -->
     <uses-permission android:name="android.permission.GET_TASKS" />
 
-    <!--
-      IMPORTANT: Change "info.androidhive.parsenotifications.permission.C2D_MESSAGE" in the lines below
-      to match your app's package name + ".permission.C2D_MESSAGE".
-    -->
+
     <permission
         android:name="ke.co.swahilibox.swahilibox.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
@@ -76,7 +73,6 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
-                <!-- IMPORTANT: Change "info.androidhive.parsenotifications" to match your app's package name. -->
                 <category android:name="ke.co.swahilibox.swahilibox" />
             </intent-filter>
         </receiver>
