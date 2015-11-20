@@ -8,27 +8,31 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="com.google.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <!-- permission needed to check app state background / foreground -->
     <uses-permission android:name="android.permission.GET_TASKS" />
 
-    <permission android:name="ke.co.swahilibox.swahilibox.permission.CD2_MESSAGE" />
-
-    <uses-permission
-        android:name="ke.co.swahilibox.swahilibox.permission.CD2_MESSAGE"
+    <!--
+      IMPORTANT: Change "info.androidhive.parsenotifications.permission.C2D_MESSAGE" in the lines below
+      to match your app's package name + ".permission.C2D_MESSAGE".
+    -->
+    <permission
+        android:name="ke.co.swahilibox.swahilibox.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <uses-permission android:name="ke.co.swahilibox.swahilibox.permission.C2D_MESSAGE" />
 
     <application
         android:name=".SwahiliBoxParse"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".Splash"
-            android:theme="@style/SplashTheme">
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,7 +52,9 @@
         <activity
             android:name=".LogIn"
             android:label="@string/title_activity_log_in"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+
+        <!-- Added for Parse push notifications -->
 
         <service android:name="com.parse.PushService" />
 
@@ -70,11 +76,12 @@
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
+                <!-- IMPORTANT: Change "info.androidhive.parsenotifications" to match your app's package name. -->
                 <category android:name="ke.co.swahilibox.swahilibox" />
             </intent-filter>
         </receiver>
 
-
+        <!-- /Added for Parse push notifications -->
     </application>
 
 </manifest>

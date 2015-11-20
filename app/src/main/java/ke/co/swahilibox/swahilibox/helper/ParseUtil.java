@@ -10,6 +10,7 @@ import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseInstallation;
 import com.parse.ParsePush;
+import com.parse.PushService;
 import com.parse.SaveCallback;
 
 import ke.co.swahilibox.swahilibox.AppConfig;
@@ -33,6 +34,7 @@ public class ParseUtil {
     public static void registerParse(Context context) {
         // initializing parse library
         Parse.initialize(context, AppConfig.PARSE_APPLICATION_ID, AppConfig.PARSE_CLIENT_KEY);
+        PushService.startServiceIfRequired(context);
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
         ParsePush.subscribeInBackground(AppConfig.PARSE_CHANNEL, new SaveCallback() {

@@ -30,7 +30,6 @@ public class SwahiliBoxParse extends Application {
         mInstance = this;
         //register with parse
         ParseUtil.registerParse(getApplicationContext());
-
         ParseUser.enableAutomaticUser();
         ParseACL defaultAcl = new ParseACL();
 

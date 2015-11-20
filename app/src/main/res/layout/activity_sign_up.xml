@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center">
 
     <com.flaviofaria.kenburnsview.KenBurnsView
         android:id="@+id/image"
@@ -20,7 +21,8 @@
             android:layout_height="wrap_content"
             android:paddingTop="56dp"
             android:paddingLeft="24dp"
-            android:paddingRight="24dp">
+            android:paddingRight="24dp"
+            android:layout_gravity="center">
 
             <!--  Name Label -->
             <android.support.design.widget.TextInputLayout
@@ -34,8 +36,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapWords"
-                    android:hint="Name"
-                    android:textColor="@color/colorAccent" />
+                    android:hint="Username"
+                    android:textColor="@color/colorTextSecondary" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Email Label -->
@@ -51,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textEmailAddress"
                     android:hint="Email"
-                    android:textColor="@color/colorAccent" />
+                    android:textColor="@color/colorTextSecondary" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Password Label -->
@@ -67,7 +69,7 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
                     android:hint="Password"
-                    android:textColor="@color/colorAccent" />
+                    android:textColor="@color/colorTextSecondary" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Signup Button -->
@@ -81,7 +83,7 @@
                 android:text="Create Account"
                 android:background="@color/colorAccent"
                 android:textAlignment="center"
-                android:textColor="#FFFFFF" />
+                android:textColor="@color/colorTextSecondary" />
 
             <TextView
                 android:id="@+id/link_login"

@@ -6,10 +6,11 @@ android {
 
     defaultConfig {
         applicationId "ke.co.swahilibox.swahilibox"
-        minSdkVersion 11
+        minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     buildTypes {
         release {
