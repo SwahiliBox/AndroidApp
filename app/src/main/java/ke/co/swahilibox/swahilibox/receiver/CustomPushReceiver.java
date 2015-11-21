@@ -9,8 +9,10 @@ import com.parse.ParsePushBroadcastReceiver;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ke.co.swahilibox.swahilibox.Main;
+import ke.co.swahilibox.swahilibox.database.SwahiliBoxDatasource;
 import ke.co.swahilibox.swahilibox.helper.NotificationUtils;
-import ke.co.swahilibox.swahilibox.helper.SBJSONParser;
+import ke.co.swahilibox.swahilibox.model.Message;
 
 /**
  * Created by japheth on 11/16/15.
@@ -20,6 +22,7 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
     private final String TAG = CustomPushReceiver.class.getSimpleName();
 
     private NotificationUtils notificationUtils;
+    SwahiliBoxDatasource datasource;
 
     private Intent parseIntent;
 
@@ -31,6 +34,8 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
     @Override
     protected void onPushReceive(Context context, Intent intent) {
         super.onPushReceive(context, intent);
+        datasource = new SwahiliBoxDatasource(context);
+        datasource.open();
 
         if (intent == null)
             return;
@@ -42,7 +47,7 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
 
             parseIntent = intent;
 
-            SBJSONParser.parsePushJson(context, json);
+            parsePushJson(context, json);
 
         } catch (JSONException e) {
             Log.e(TAG, "Push message json exception: " + e.getMessage());
@@ -52,6 +57,7 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
     @Override
     protected void onPushDismiss(Context context, Intent intent) {
         super.onPushDismiss(context, intent);
+        datasource.close();
     }
 
     @Override
@@ -65,6 +71,35 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
      * @param context
      * @param json
      */
+    private void parsePushJson(Context context, JSONObject json) {
+        try {
+            boolean isBackground = json.getBoolean("is_background");
+            JSONObject data = json.getJSONObject("data");
+            String title = data.getString("title");
+            String message = data.getString("message");
+
+            /**
+             * Create message object
+             * set attributes
+             * save it
+             */
+            Message mess = new Message();
+            mess.setMessage(message);
+            mess.setTitle(message);
+
+            datasource.createNotification(mess);
+
+            Log.i(TAG, "Parsed JSON: " + title + message);
+
+            if (!isBackground) {
+                Intent resultIntent = new Intent(context, Main.class);
+                showNotificationMessage(context, title, message, resultIntent);
+            }
+
+        } catch (JSONException e) {
+            Log.e(TAG, "Push message json exception: " + e.getMessage());
+        }
+    }
 
     /**
      * Shows the notification message in the notification bar

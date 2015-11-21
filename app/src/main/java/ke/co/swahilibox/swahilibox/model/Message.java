@@ -7,6 +7,8 @@ public class Message {
 
     private String message;
     private long timestamp;
+    private long id;
+    private String title;
 
     public Message() {
     }
@@ -22,6 +24,22 @@ public class Message {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public long getTimestamp() {

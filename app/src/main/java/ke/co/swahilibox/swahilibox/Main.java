@@ -57,6 +57,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         pref = new PrefManager(this);
         dataSource = new SwahiliBoxDatasource(this);
+        dataSource.open();
 
         mToolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(mToolbar);
@@ -67,8 +68,8 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         listView = (ListView) findViewById(R.id.list_view);
         messages = new ArrayList<>();
-        adapter = new MessageAdapter(this, messages);
-        listView.setAdapter(adapter);
+
+        updateDisplay();
 
         Intent intent = getIntent();
 
@@ -163,15 +164,24 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     //add the notification messages to a listview
-    @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-        Log.i("NewIntent", "Message Notification");
-        String message = intent.getStringExtra("message");
+//    @Override
+//    protected void onNewIntent(Intent intent) {
+//        super.onNewIntent(intent);
+//        Log.i("NewIntent", "Message Notification");
+//        String message = intent.getStringExtra("message");
+//
+////        Message m = new Message(message, System.currentTimeMillis());
+//        messages.add(0, m);
+//        adapter.notifyDataSetChanged();
+//    }
 
-        Message m = new Message(message, System.currentTimeMillis());
-        messages.add(0, m);
-        adapter.notifyDataSetChanged();
+    public void updateDisplay() {
+        //get list of messages from the database and set
+        //the adapter
+        messages = dataSource.findAll();
+        adapter = new MessageAdapter(this, messages);
+        listView.setAdapter(adapter);
+
     }
 
     @Override
