@@ -1,5 +1,7 @@
 package ke.co.swahilibox.swahilibox;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -60,10 +62,10 @@ public class SignUp extends AppCompatActivity {
 
         signUp.setEnabled(false);
 
-//        final ProgressDialog progressDialog = new ProgressDialog(SignUp.this);
-//        progressDialog.setIndeterminate(true);
-//        progressDialog.setMessage("Creating Account...");
-//        progressDialog.show();
+        final ProgressDialog progressDialog = new ProgressDialog(SignUp.this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Creating Account...");
+        progressDialog.show();
 
         String name = this.name.getText().toString();
         String email = this.email.getText().toString();
@@ -84,6 +86,8 @@ public class SignUp extends AppCompatActivity {
                 } else {
                     onSignupFailed();
                 }
+
+                progressDialog.dismiss();
             }
         });
 
@@ -92,7 +96,8 @@ public class SignUp extends AppCompatActivity {
 
     public void onSignupSuccess() {
         signUp.setEnabled(true);
-        setResult(RESULT_OK, null);
+        Intent intent = new Intent(SignUp.this, Main.class);
+        startActivity(intent);
         finish();
     }
 

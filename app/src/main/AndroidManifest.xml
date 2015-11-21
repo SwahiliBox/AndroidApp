@@ -13,7 +13,6 @@
     <!-- permission needed to check app state background / foreground -->
     <uses-permission android:name="android.permission.GET_TASKS" />
 
-
     <permission
         android:name="ke.co.swahilibox.swahilibox.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
@@ -42,7 +41,6 @@
             android:label="@string/title_activity_main"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".SignUp"
             android:label="@string/title_activity_sign_up"
@@ -79,6 +77,10 @@
         </receiver>
 
         <!-- /Added for Parse push notifications -->
+        <activity
+            android:name=".AboutUs"
+            android:label="@string/title_activity_about_us"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

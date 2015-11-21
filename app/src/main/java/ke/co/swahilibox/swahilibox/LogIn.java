@@ -1,5 +1,6 @@
 package ke.co.swahilibox.swahilibox;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -62,10 +63,10 @@ public class LogIn extends AppCompatActivity {
 
         logIn.setEnabled(false);
 
-//        ProgressDialog progressDialog = new ProgressDialog(LogIn.this);
-//        progressDialog.setIndeterminate(true);
-//        progressDialog.setMessage("Logging you in...");
-//        progressDialog.show();
+        final ProgressDialog progressDialog = new ProgressDialog(LogIn.this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("Logging you in...");
+        progressDialog.show();
 
         final String userName = username.getText().toString();
         String _pass = password.getText().toString();
@@ -83,17 +84,11 @@ public class LogIn extends AppCompatActivity {
                     onLogInFailed();
                 }
 
+                progressDialog.dismiss();
+
             }
         });
 
-//        new android.os.Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                //on complete call either onLoginSuccess or onLoginFailed
-//                onLoginSuccess();
-//                //onLoginFailed
-//            }
-//        }, 3000);
     }
 
     @Override

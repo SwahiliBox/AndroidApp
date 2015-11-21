@@ -205,10 +205,17 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                     finish();
                     break;
                 case R.id.about_us:
-                    Toast.makeText(this, "Taking you to about us", Toast.LENGTH_SHORT).show();
+                    intent = new Intent(this, AboutUs.class);
+                    startActivity(intent);
+                    Toast.makeText(this, "Loading...", Toast.LENGTH_LONG).show();
                     break;
                 case R.id.invite:
-                    Toast.makeText(this, "Sending an invite", Toast.LENGTH_SHORT).show();
+                    intent = new Intent(Intent.ACTION_SEND);
+                    intent.setType("text/plain");
+                    intent.putExtra(Intent.EXTRA_TEXT, "Hello, you are invited to join SwahiliBox. " +
+                            "Check our website http://www.swahilibox.co.ke and download the " +
+                            "SwahiliBox App to stay upto date");
+                    startActivity(intent);
                     break;
             }
         }

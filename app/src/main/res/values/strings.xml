@@ -26,4 +26,5 @@
     </string>
     <string name="title_activity_sign_up">SignUp</string>
     <string name="title_activity_log_in">LogIn</string>
+    <string name="title_activity_about_us">AboutUS</string>
 </resources>
