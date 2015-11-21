@@ -78,4 +78,11 @@ public class SwahiliBoxDatasource {
 
         return messages;
     }
+
+    public boolean deleteMessage(Message message){
+
+        String where = SwahiliBoxDBOpenHelper.COLUMN_NOTIFICATION_ID + "=" + message.getId();
+        int result = database.delete(SwahiliBoxDBOpenHelper.TABLE_NOTIFICATIONS , where, null);
+        return (result == 1);
+    }
 }

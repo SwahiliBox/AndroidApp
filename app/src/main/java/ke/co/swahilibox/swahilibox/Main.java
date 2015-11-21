@@ -3,6 +3,7 @@ package ke.co.swahilibox.swahilibox;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
@@ -12,7 +13,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ActionMode;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -48,6 +56,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     private PrefManager pref;
     private TextView user_name;
     private SwahiliBoxDatasource dataSource;
+    private ActionMode.Callback mActionModeCallback;
 
 
     @Override
@@ -61,6 +70,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
 
         mToolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(mToolbar);
+
         user_name = (TextView) findViewById(R.id.username);
         mDrawer = (NavigationView) findViewById(R.id.main_drawer);
         mDrawer.setNavigationItemSelectedListener(this);
@@ -72,18 +82,6 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         updateDisplay();
 
         Intent intent = getIntent();
-
-        ParseUser user = ParseUser.getCurrentUser();
-        String email = user.getEmail();
-
-        user_name.setText(user.getUsername().toString());
-
-        if (email != null) {
-            Log.i(TAG, "Parse user email" + user.getEmail());
-            ParseUtil.subscribeWithEmail(user.getEmail());
-        } else {
-            Log.i(TAG, "Email is null. Not subscribing to parse!");
-        }
 
         mDrawerToggle = new ActionBarDrawerToggle(this,
                 mDrawerLayout,
@@ -100,6 +98,77 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         }
         mSelectedId = savedInstanceState == null ? R.id.invite : savedInstanceState.getInt(SELECTED_ITEM_ID);
         navigate(mSelectedId);
+
+        ParseUser user = ParseUser.getCurrentUser();
+        String email = user.getEmail();
+        user_name.setText(user.getUsername().toString());
+
+        if (email != null) {
+            Log.i(TAG, "Parse user email" + user.getEmail());
+            ParseUtil.subscribeWithEmail(user.getEmail());
+        } else {
+            Log.i(TAG, "Email is null. Not subscribing to parse!");
+        }
+
+
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
+            //use floating context menu on Froyo and Ginger bread
+            registerForContextMenu(listView);
+        } else {
+            //use contextual action bar on Honeycomb and higher
+            listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
+            listView.setMultiChoiceModeListener(new AbsListView.MultiChoiceModeListener() {
+                @Override
+                public void onItemCheckedStateChanged(ActionMode actionMode, int i, long l, boolean b) {
+
+                }
+
+                @Override
+                public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
+                    //inflate the delete_message menu resource file
+                    MenuInflater inflater = actionMode.getMenuInflater();
+                    inflater.inflate(R.menu.message_list_item_context, menu);
+                    return true;
+                }
+
+                @Override
+                public boolean onPrepareActionMode(ActionMode actionMode, Menu menu) {
+                    return false;
+                }
+
+                @Override
+                public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+                    //action taken when a list item is long pressed
+                    switch (menuItem.getItemId()) {
+                        case R.id.delete_message:
+                            MessageAdapter adapter = (MessageAdapter) listView.getAdapter();
+
+                            //loop through all items
+                            for (int i = adapter.getCount() - 1; i > 0; i++) {
+                                //check if item is checked
+                                if (listView.isItemChecked(i)) {
+                                    //delete selected item
+                                    dataSource.deleteMessage(adapter.getItem(i));
+                                }
+                                actionMode.finish();
+                                return true;
+                            }
+
+                        default:
+                            return false;
+                    }
+                }
+
+                @Override
+                public void onDestroyActionMode(ActionMode actionMode) {
+                    //update the display
+                    messages = dataSource.findAll();
+                    updateDisplay();
+                }
+            });
+        }
+
+
     }
 
     private boolean didUserSeeDrawer() {
@@ -163,17 +232,24 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         }
     }
 
-    //add the notification messages to a listview
-//    @Override
-//    protected void onNewIntent(Intent intent) {
-//        super.onNewIntent(intent);
-//        Log.i("NewIntent", "Message Notification");
-//        String message = intent.getStringExtra("message");
-//
-////        Message m = new Message(message, System.currentTimeMillis());
-//        messages.add(0, m);
-//        adapter.notifyDataSetChanged();
-//    }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        getMenuInflater().inflate(R.menu.message_list_item_context, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int position = info.position;
+        Message message = (Message) listView.getAdapter().getItem(position);
+        switch (item.getItemId()) {
+            case R.id.delete_message:
+                dataSource.deleteMessage(message);
+                updateDisplay();
+                return true;
+        }
+        return super.onContextItemSelected(item);
+    }
 
     public void updateDisplay() {
         //get list of messages from the database and set

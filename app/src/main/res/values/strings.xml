@@ -10,6 +10,7 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="title_activity_login">Sign in</string>
+    <string name="delete_message">Delete</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>

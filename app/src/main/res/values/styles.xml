@@ -8,8 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/colorTextPrimary</item>
         <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="actionModeStyle">@style/LywActionMode</item>
 
+    </style>
 
+    <style name="LywActionMode" parent="Base.Widget.AppCompat.ActionMode">
+        <item name="background">@color/colorPrimary</item>
+        <item name="backgroundSplit">@color/colorPrimary</item>
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
