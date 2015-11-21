@@ -85,7 +85,7 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
              */
             Message mess = new Message();
             mess.setMessage(message);
-            mess.setTitle(message);
+            mess.setTitle(title);
 
             datasource.createNotification(mess);
 

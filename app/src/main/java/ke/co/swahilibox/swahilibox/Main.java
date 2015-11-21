@@ -23,6 +23,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.ParseUser;
 
@@ -96,12 +97,12 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         } else {
             hideDrawer();
         }
-        mSelectedId = savedInstanceState == null ? R.id.invite : savedInstanceState.getInt(SELECTED_ITEM_ID);
+        mSelectedId = savedInstanceState == null ? 0 : savedInstanceState.getInt(SELECTED_ITEM_ID);
         navigate(mSelectedId);
 
         ParseUser user = ParseUser.getCurrentUser();
         String email = user.getEmail();
-        user_name.setText(user.getUsername().toString());
+        user_name.setText(user.getUsername());
 
         if (email != null) {
             Log.i(TAG, "Parse user email" + user.getEmail());
@@ -144,7 +145,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                             MessageAdapter adapter = (MessageAdapter) listView.getAdapter();
 
                             //loop through all items
-                            for (int i = adapter.getCount() - 1; i > 0; i++) {
+                            for (int i = adapter.getCount() - 1; i >= 0; i--) {
                                 //check if item is checked
                                 if (listView.isItemChecked(i)) {
                                     //delete selected item
@@ -194,10 +195,22 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     //navigate the navigation view menu
     private void navigate(int mSelectedId) {
         Intent intent = null;
-        switch(mSelectedId){
-            case R.id.log_out:
-              pref.logOut();
-                finish();
+
+        if (mSelectedId != 0) {
+            switch (mSelectedId) {
+                case R.id.log_out:
+                    pref.logOut();
+                    intent = new Intent(this, LogIn.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+                case R.id.about_us:
+                    Toast.makeText(this, "Taking you to about us", Toast.LENGTH_SHORT).show();
+                    break;
+                case R.id.invite:
+                    Toast.makeText(this, "Sending an invite", Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
     }
 

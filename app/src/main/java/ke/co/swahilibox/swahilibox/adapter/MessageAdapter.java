@@ -1,7 +1,6 @@
 package ke.co.swahilibox.swahilibox.adapter;
 
 import android.content.Context;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,13 +34,11 @@ public class MessageAdapter extends ArrayAdapter<Message> {
 
         Message message = getItem(position);
         TextView mess = (TextView) view.findViewById(R.id.message);
-        TextView timestamp = (TextView) view.findViewById(R.id.timestamp);
+        TextView title = (TextView) view.findViewById(R.id.title);
 
+        title.setText(message.getTitle());
         mess.setText(message.getMessage());
-        CharSequence ago = DateUtils.getRelativeTimeSpanString(message.getTimestamp(), System.currentTimeMillis(),
-                0L, DateUtils.FORMAT_ABBREV_ALL);
 
-        timestamp.setText(String.valueOf(ago));
         return view;
     }
 }
