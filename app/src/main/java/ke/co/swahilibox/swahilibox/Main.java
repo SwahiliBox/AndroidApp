@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ke.co.swahilibox.swahilibox.adapter.MessageAdapter;
+import ke.co.swahilibox.swahilibox.database.SwahiliBoxDatasource;
 import ke.co.swahilibox.swahilibox.helper.ParseUtil;
 import ke.co.swahilibox.swahilibox.helper.PrefManager;
 import ke.co.swahilibox.swahilibox.model.Message;
@@ -46,6 +47,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
     private List<Message> messages;
     private PrefManager pref;
     private TextView user_name;
+    private SwahiliBoxDatasource dataSource;
 
 
     @Override
@@ -54,6 +56,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         setContentView(R.layout.activity_main);
 
         pref = new PrefManager(this);
+        dataSource = new SwahiliBoxDatasource(this);
 
         mToolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(mToolbar);
@@ -169,5 +172,17 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         Message m = new Message(message, System.currentTimeMillis());
         messages.add(0, m);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        dataSource.open();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dataSource.close();
     }
 }

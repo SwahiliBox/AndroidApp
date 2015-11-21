@@ -9,8 +9,8 @@ import com.parse.ParsePushBroadcastReceiver;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import ke.co.swahilibox.swahilibox.Main;
 import ke.co.swahilibox.swahilibox.helper.NotificationUtils;
+import ke.co.swahilibox.swahilibox.helper.SBJSONParser;
 
 /**
  * Created by japheth on 11/16/15.
@@ -42,7 +42,7 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
 
             parseIntent = intent;
 
-            parsePushJson(context, json);
+            SBJSONParser.parsePushJson(context, json);
 
         } catch (JSONException e) {
             Log.e(TAG, "Push message json exception: " + e.getMessage());
@@ -65,25 +65,6 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
      * @param context
      * @param json
      */
-    private void parsePushJson(Context context, JSONObject json) {
-        try {
-            boolean isBackground = json.getBoolean("is_background");
-            JSONObject data = json.getJSONObject("data");
-            String title = data.getString("title");
-            String message = data.getString("message");
-
-            Log.i(TAG, "Parsed JSON: " + title + message);
-
-            if (!isBackground) {
-                Intent resultIntent = new Intent(context, Main.class);
-                showNotificationMessage(context, title, message, resultIntent);
-            }
-
-        } catch (JSONException e) {
-            Log.e(TAG, "Push message json exception: " + e.getMessage());
-        }
-    }
-
 
     /**
      * Shows the notification message in the notification bar
@@ -94,7 +75,7 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
      * @param message
      * @param intent
      */
-    private void showNotificationMessage(Context context, String title, String message, Intent intent) {
+    public void showNotificationMessage(Context context, String title, String message, Intent intent) {
 
         notificationUtils = new NotificationUtils(context);
 

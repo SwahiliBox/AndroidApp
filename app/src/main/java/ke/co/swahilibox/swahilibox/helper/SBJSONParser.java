@@ -7,6 +7,7 @@ import android.util.Log;
 import org.json.JSONObject;
 
 import ke.co.swahilibox.swahilibox.Main;
+import ke.co.swahilibox.swahilibox.receiver.CustomPushReceiver;
 
 /**
  * Created by japheth on 11/16/15.
@@ -25,7 +26,7 @@ public class SBJSONParser {
 
             if (!isBackground) {
                 Intent intent = new Intent(context, Main.class);
-                //show the notification
+                new CustomPushReceiver().showNotificationMessage(context, title, message, intent);
             }
         } catch (Exception e) {
             Log.e(TAG, "An error ocurred during parsing");

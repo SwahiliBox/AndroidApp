@@ -3,8 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="256dp"
     android:alpha="0.8"
-    android:background="@drawable/swahilibox_splash"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/splash"
+        android:layout_gravity="center" />
 
     <TextView
         style="@style/TextAppearance.AppCompat.Title"
