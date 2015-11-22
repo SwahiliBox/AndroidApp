@@ -203,6 +203,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                     pref.logOut();
                     intent = new Intent(this, LogIn.class);
                     startActivity(intent);
+                    overridePendingTransition(R.transition.push_down_in, R.transition.push_down_out);
                     finish();
                     break;
                 case R.id.about_us:

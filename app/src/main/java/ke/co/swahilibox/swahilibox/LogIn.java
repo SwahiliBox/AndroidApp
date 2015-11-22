@@ -50,7 +50,8 @@ public class LogIn extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SignUp.class);
-                startActivityForResult(intent, REQUEST_SIGNUP);
+                startActivity(intent);
+                overridePendingTransition(R.transition.slide_in_right, R.transition.slide_out_left);
             }
         });
     }
@@ -76,9 +77,10 @@ public class LogIn extends AppCompatActivity {
             public void done(ParseUser user, com.parse.ParseException e) {
                 //If user exists and authenticated send them to main
                 if (user != null) {
-                    Intent intent = new Intent(LogIn.this, Main.class);
                     pref.createLoginSession(userName);
+                    Intent intent = new Intent(LogIn.this, Main.class);
                     startActivity(intent);
+                    overridePendingTransition(R.transition.push_up_in, R.transition.push_up_out);
                     finish();
                 } else {
                     onLogInFailed();

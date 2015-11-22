@@ -47,8 +47,9 @@ public class SignUp extends AppCompatActivity {
         logInLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Finish the registration screen and return to the Login activity
-                finish();
+                Intent intent = new Intent(getApplicationContext(), LogIn.class);
+                startActivity(intent);
+                overridePendingTransition(R.transition.slide_in_left, R.transition.slide_out_right);
             }
         });
     }
@@ -98,6 +99,7 @@ public class SignUp extends AppCompatActivity {
         signUp.setEnabled(true);
         Intent intent = new Intent(SignUp.this, Main.class);
         startActivity(intent);
+        overridePendingTransition(R.transition.slide_in_right, R.transition.slide_out_left);
         finish();
     }
 

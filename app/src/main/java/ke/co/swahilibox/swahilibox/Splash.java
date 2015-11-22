@@ -17,10 +17,12 @@ public class Splash extends AppCompatActivity {
         if (manager.isLoggedIn()) {
             Intent intent = new Intent(Splash.this, Main.class);
             startActivity(intent);
+            overridePendingTransition(R.transition.push_up_in, 0);
             finish();
         } else {
             Intent intent = new Intent(Splash.this, LogIn.class);
             startActivity(intent);
+            overridePendingTransition(R.transition.push_up_in, 0);
             finish();
         }
 
