@@ -151,9 +151,10 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
                                     //delete selected item
                                     dataSource.deleteMessage(adapter.getItem(i));
                                 }
-                                actionMode.finish();
-                                return true;
+
                             }
+                            actionMode.finish();
+                            return true;
 
                         default:
                             return false;

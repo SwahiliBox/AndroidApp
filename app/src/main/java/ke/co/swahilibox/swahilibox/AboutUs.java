@@ -1,6 +1,7 @@
 package ke.co.swahilibox.swahilibox;
 
 import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebChromeClient;
@@ -19,7 +20,7 @@ public class AboutUs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
 
-        url = "http://www.swahilibox.co.ke";
+        url = "http://www.facebook.com";
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setMax(100);
@@ -35,16 +36,35 @@ public class AboutUs extends AppCompatActivity {
         webView.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView webView, int progress) {
 
-                final ProgressDialog progressDialog = new ProgressDialog(AboutUs.this);
+//                final ProgressDialog progressDialog = new ProgressDialog(AboutUs.this);
+//                progressDialog.setIndeterminate(true);
+//                progressDialog.setMessage("Taking you to our site...");
+//                progressDialog.show();
+//
+//                if (progress == 100) {
+//                    progressDialog.dismiss();
+//                }
+
+            }
+        });
+
+        webView.setWebViewClient(new WebViewClient() {
+            ProgressDialog progressDialog;
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap bitmap) {
+                progressDialog = new ProgressDialog(AboutUs.this);
                 progressDialog.setIndeterminate(true);
                 progressDialog.setMessage("Taking you to our site...");
                 progressDialog.show();
-
-                if (progress == 100) {
-                    progressDialog.dismiss();
-                }
+                super.onPageStarted(view, url, bitmap);
             }
 
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                progressDialog.dismiss();
+            }
         });
 
         webView.loadUrl(url);
