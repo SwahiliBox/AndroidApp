@@ -78,6 +78,7 @@ public class Main extends AppCompatActivity implements NavigationView.OnNavigati
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
         listView = (ListView) findViewById(R.id.list_view);
+        this.listView.setEmptyView(findViewById(R.id.empty));   //if list view is empty dispay the empty textview
         messages = new ArrayList<>();
 
         updateDisplay();

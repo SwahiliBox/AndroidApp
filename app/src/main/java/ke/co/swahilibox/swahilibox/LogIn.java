@@ -94,19 +94,8 @@ public class LogIn extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_SIGNUP) {
-            if (resultCode == RESULT_OK) {
-                Intent intent = new Intent(LogIn.this, Main.class);
-                startActivity(intent);
-                this.finish();
-            }
-        }
-    }
-
-    @Override
     public void onBackPressed() {
-        moveTaskToBack(false);
+        moveTaskToBack(true);
     }
 
     public void onLoginSuccess() {
@@ -125,12 +114,6 @@ public class LogIn extends AppCompatActivity {
         String userName = this.username.getText().toString();
         String _password = this.password.getText().toString();
 
-//        if (_email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(_email).matches()) {
-//            username.setError("enter a valid email address");
-//            valid = false;
-//        } else {
-//            username.setError(null);
-//        }
 
         if (_password.isEmpty() || password.length() < 4 || password.length() > 10) {
             password.setError("between 4 and 10 alphanumeric characters");
