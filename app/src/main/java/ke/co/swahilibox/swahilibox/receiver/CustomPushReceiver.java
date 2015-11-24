@@ -9,7 +9,7 @@ import com.parse.ParsePushBroadcastReceiver;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import ke.co.swahilibox.swahilibox.Main;
+import ke.co.swahilibox.swahilibox.Splash;
 import ke.co.swahilibox.swahilibox.database.SwahiliBoxDatasource;
 import ke.co.swahilibox.swahilibox.helper.NotificationUtils;
 import ke.co.swahilibox.swahilibox.model.Message;
@@ -92,7 +92,7 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
             Log.i(TAG, "Parsed JSON: " + title + message);
 
             if (!isBackground) {
-                Intent resultIntent = new Intent(context, Main.class);
+                Intent resultIntent = new Intent(context, Splash.class);
                 showNotificationMessage(context, title, message, resultIntent);
             }
 

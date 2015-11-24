@@ -95,7 +95,7 @@ public class LogIn extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        moveTaskToBack(true);
+        moveTaskToBack(false);
     }
 
     public void onLoginSuccess() {

@@ -15,6 +15,7 @@ import com.parse.SignUpCallback;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import ke.co.swahilibox.swahilibox.helper.PrefManager;
 
 public class SignUp extends AppCompatActivity {
 
@@ -69,7 +70,7 @@ public class SignUp extends AppCompatActivity {
         progressDialog.show();
 
         String name = this.name.getText().toString();
-        String email = this.email.getText().toString();
+        final String email = this.email.getText().toString();
         String password = this.password.getText().toString();
 
         ParseUser user = new ParseUser();
@@ -82,7 +83,7 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void done(com.parse.ParseException e) {
                 if (e == null) {
-
+                    new PrefManager(SignUp.this).createLoginSession(email);
                     onSignupSuccess();
                 } else {
                     onSignupFailed();

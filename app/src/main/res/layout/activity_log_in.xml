@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
-                android:background="@color/colorAccent"
+                android:background="#FFEB3B"
                 android:padding="12dp"
                 android:text="Login"
                 android:textAlignment="center" />
