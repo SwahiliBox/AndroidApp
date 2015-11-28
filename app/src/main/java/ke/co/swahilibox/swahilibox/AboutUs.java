@@ -20,7 +20,7 @@ public class AboutUs extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_us);
 
-        url = "http://www.facebook.com";
+        url = "http://swahilibox.co.ke/blog/2015/02/welcome-to-swahilibox";
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBar.setMax(100);

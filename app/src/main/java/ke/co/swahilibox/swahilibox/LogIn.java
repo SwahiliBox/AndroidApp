@@ -52,6 +52,7 @@ public class LogIn extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), SignUp.class);
                 startActivity(intent);
                 overridePendingTransition(R.transition.slide_in_right, R.transition.slide_out_left);
+                finish();
             }
         });
     }

@@ -68,6 +68,7 @@
                 android:background="#FFEB3B"
                 android:padding="12dp"
                 android:text="Login"
+                android:textColor="@color/colorTextSecondary"
                 android:textAlignment="center" />
 
             <TextView
