@@ -98,7 +98,7 @@ public class SignUp extends AppCompatActivity {
 
     public void onSignupSuccess() {
         signUp.setEnabled(true);
-        Intent intent = new Intent(SignUp.this, Main.class);
+        Intent intent = new Intent(SignUp.this, Splash.class);
         startActivity(intent);
         overridePendingTransition(R.transition.slide_in_right, R.transition.slide_out_left);
         finish();
