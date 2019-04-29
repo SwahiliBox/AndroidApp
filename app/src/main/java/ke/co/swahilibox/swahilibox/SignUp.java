@@ -13,30 +13,24 @@ import android.widget.Toast;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
 import ke.co.swahilibox.swahilibox.helper.PrefManager;
 
 public class SignUp extends AppCompatActivity {
 
     private static final String TAG = "SignupActivity";
+    private EditText name;
+    private EditText email;
+    private EditText password;
+    private Button signUp;
+    private TextView logInLink;
 
-    @InjectView(R.id.input_name)
-    EditText name;
-    @InjectView(R.id.input_email)
-    EditText email;
-    @InjectView(R.id.input_password)
-    EditText password;
-    @InjectView(R.id.btn_signup)
-    Button signUp;
-    @InjectView(R.id.link_login)
-    TextView logInLink;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        ButterKnife.inject(this);
+        //initializes views
+        initViews();
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +47,14 @@ public class SignUp extends AppCompatActivity {
                 overridePendingTransition(R.transition.slide_in_left, R.transition.slide_out_right);
             }
         });
+    }
+
+    private void initViews() {
+        name = findViewById(R.id.input_name);
+        email = findViewById(R.id.input_email);
+        password = findViewById(R.id.input_password);
+        signUp = findViewById(R.id.btn_signup);
+        logInLink = findViewById(R.id.link_login);
     }
 
     public void signup() {
@@ -104,6 +106,7 @@ public class SignUp extends AppCompatActivity {
         finish();
     }
 
+    //issues 1(Login Failed instead of signupFailed)
     public void onSignupFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
 
