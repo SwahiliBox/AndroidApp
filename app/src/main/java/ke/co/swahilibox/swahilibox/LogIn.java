@@ -3,7 +3,7 @@ package ke.co.swahilibox.swahilibox;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.parse.LogInCallback;
 import com.parse.ParseUser;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ke.co.swahilibox.swahilibox.helper.PrefManager;
 
 public class LogIn extends AppCompatActivity {
@@ -20,19 +22,22 @@ public class LogIn extends AppCompatActivity {
     private static final String TAG = LogIn.class.getSimpleName();
     private static final int REQUEST_SIGNUP = 0;
 
-
+    @BindView(R.id.input_username)
+    EditText username;
+    @BindView(R.id.input_password)
+    EditText password;
+    @BindView(R.id.btn_login)
+    Button logIn;
+    @BindView(R.id.link_signup)
+    TextView signUp;
 
     PrefManager pref = null;
-    private EditText username;
-    private EditText password;
-    private Button logIn;
-    private TextView signUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
-        initViews();
+        ButterKnife.bind(this);
         pref = new PrefManager(this);
         logIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,15 +55,6 @@ public class LogIn extends AppCompatActivity {
                 finish();
             }
         });
-
-        initViews();
-    }
-
-    private void initViews() {
-        username = findViewById(R.id.input_username);
-        password = findViewById(R.id.input_password);
-        logIn = findViewById(R.id.btn_login);
-        signUp = findViewById(R.id.link_signup);
     }
 
     public void logIn() {

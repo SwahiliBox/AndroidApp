@@ -3,7 +3,7 @@ package ke.co.swahilibox.swahilibox;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,24 +13,30 @@ import android.widget.Toast;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import ke.co.swahilibox.swahilibox.helper.PrefManager;
 
 public class SignUp extends AppCompatActivity {
 
     private static final String TAG = "SignupActivity";
-    private EditText name;
-    private EditText email;
-    private EditText password;
-    private Button signUp;
-    private TextView logInLink;
 
+    @BindView(R.id.input_name)
+    EditText name;
+    @BindView(R.id.input_email)
+    EditText email;
+    @BindView(R.id.input_password)
+    EditText password;
+    @BindView(R.id.btn_signup)
+    Button signUp;
+    @BindView(R.id.link_login)
+    TextView logInLink;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        //initializes views
-        initViews();
+        ButterKnife.bind(this);
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,14 +53,6 @@ public class SignUp extends AppCompatActivity {
                 overridePendingTransition(R.transition.slide_in_left, R.transition.slide_out_right);
             }
         });
-    }
-
-    private void initViews() {
-        name = findViewById(R.id.input_name);
-        email = findViewById(R.id.input_email);
-        password = findViewById(R.id.input_password);
-        signUp = findViewById(R.id.btn_signup);
-        logInLink = findViewById(R.id.link_login);
     }
 
     public void signup() {
@@ -106,7 +104,6 @@ public class SignUp extends AppCompatActivity {
         finish();
     }
 
-    //issues 1(Login Failed instead of signupFailed)
     public void onSignupFailed() {
         Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
 
