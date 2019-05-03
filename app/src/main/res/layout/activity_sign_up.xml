@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_gravity="center"
     android:layout_height="match_parent"
-    tools:context=".views.LogIn">
+    android:layout_gravity="center">
 
     <com.flaviofaria.kenburnsview.KenBurnsView
         android:id="@+id/image"
@@ -14,36 +11,36 @@
         android:scaleType="fitXY"
         android:src="@drawable/login" />
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-<<<<<<< HEAD
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/image" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/sign_in_button"
-        app:layout_constraintStart_toStartOf="@+id/sign_in_button"
-        app:layout_constraintTop_toBottomOf="@+id/sign_in_button" />
-
-=======
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:paddingTop="56dp"
             android:paddingLeft="24dp"
             android:paddingRight="24dp"
             android:layout_gravity="center">
 
+            <!--  Name Label -->
+            <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
 
-            <!-- Username Label -->
+                <EditText
+                    android:id="@+id/input_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textCapWords"
+                    android:hint="Username"
+                    android:textColor="@color/colorTextSecondary" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Email Label -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,10 +48,11 @@
                 android:layout_marginBottom="8dp">
 
                 <EditText
-                    android:id="@+id/input_username"
+                    android:id="@+id/input_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Username"
+                    android:inputType="textEmailAddress"
+                    android:hint="Email"
                     android:textColor="@color/colorTextSecondary" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,18 +72,28 @@
                     android:textColor="@color/colorTextSecondary" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Signup Button -->
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_login"
+                android:id="@+id/btn_signup"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
-                android:background="#FFEB3B"
                 android:padding="12dp"
-                android:text="Login"
-                android:textColor="@color/colorTextSecondary"
-                android:textAlignment="center" />
->>>>>>> a5b23eb9ff972aa736fb5682c31c6c619a3e70e4
+                android:text="Create Account"
+                android:background="#FFEB3B"
+                android:textAlignment="center"
+                android:textColor="@color/colorTextSecondary" />
 
+            <TextView
+                android:id="@+id/link_login"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:text="Already a member? Login"
+                android:gravity="center"
+                android:textSize="16dip" />
 
-</android.support.constraint.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
