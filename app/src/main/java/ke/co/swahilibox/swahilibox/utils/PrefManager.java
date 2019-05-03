@@ -1,4 +1,4 @@
-package ke.co.swahilibox.swahilibox.helper;
+package ke.co.swahilibox.swahilibox.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

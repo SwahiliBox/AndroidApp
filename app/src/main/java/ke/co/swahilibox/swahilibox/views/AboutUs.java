@@ -1,4 +1,4 @@
-package ke.co.swahilibox.swahilibox;
+package ke.co.swahilibox.swahilibox.views;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
@@ -8,6 +8,8 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+
+import ke.co.swahilibox.swahilibox.R;
 
 public class AboutUs extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package ke.co.swahilibox.swahilibox;
+package ke.co.swahilibox.swahilibox.utils;
 
 /**
  * Created by japheth on 11/15/15.

@@ -1,4 +1,4 @@
-package ke.co.swahilibox.swahilibox.helper;
+package ke.co.swahilibox.swahilibox.utils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,8 +12,6 @@ import com.parse.ParseInstallation;
 import com.parse.ParsePush;
 import com.parse.PushService;
 import com.parse.SaveCallback;
-
-import ke.co.swahilibox.swahilibox.AppConfig;
 
 /**
  * Created by japheth on 11/15/15.

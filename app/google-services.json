@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "274119841360",
+    "firebase_url": "https://swahilibox-679fd.firebaseio.com",
+    "project_id": "swahilibox-679fd",
+    "storage_bucket": "swahilibox-679fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274119841360:android:1b436423bc0276d1",
+        "android_client_info": {
+          "package_name": "ke.co.swahilibox.swahilibox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274119841360-j505jj2jovc2j40cfqqrkhv9q0v7279d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ke.co.swahilibox.swahilibox",
+            "certificate_hash": "076cd1aa8cd77bd5b26ca5bcba1bc318adaec999"
+          }
+        },
+        {
+          "client_id": "274119841360-5m6s10ovga5jecclbsjjdecava1tmdpo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArG1i2aH88z4Hq83friBPyj0yw6FHpmk0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274119841360-5m6s10ovga5jecclbsjjdecava1tmdpo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

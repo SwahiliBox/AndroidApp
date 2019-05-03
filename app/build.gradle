@@ -1,6 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "ke.co.swahilibox.swahilibox"
@@ -29,4 +33,39 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.google.firebase:firebase-auth:16.2.1'
+    // Add the Facebook SDK
+    implementation 'com.facebook.android:facebook-android-sdk:4.20.0'
+
+
+    //room
+    implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+
+    implementation 'com.android.support:support-compat:28.0.0'
+
+    implementation 'android.arch.persistence.room:runtime:' + rootProject.archRoomVersion;
+    annotationProcessor 'android.arch.persistence.room:compiler:' + rootProject.archRoomVersion;
+
+    implementation "android.arch.lifecycle:extensions:1.1.1"
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+
+    implementation 'com.squareup.retrofit2:retrofit:2.2.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation 'io.reactivex:rxjava:1.1.9'
+
+    //tests
+
+    //Roboelectric
+    testImplementation "org.robolectric:robolectric:4.2"
+
+    //mockito library
+    testImplementation 'org.mockito:mockito-core:2.6.3'
+
+    androidTestImplementation 'org.mockito:mockito-android:2.6.3'
 }
+apply plugin: 'com.google.gms.google-services'

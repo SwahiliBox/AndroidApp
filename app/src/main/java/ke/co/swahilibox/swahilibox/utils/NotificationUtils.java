@@ -1,4 +1,4 @@
-package ke.co.swahilibox.swahilibox.helper;
+package ke.co.swahilibox.swahilibox.utils;
 
 import android.app.ActivityManager;
 import android.app.Notification;
@@ -15,7 +15,6 @@ import android.text.TextUtils;
 
 import java.util.List;
 
-import ke.co.swahilibox.swahilibox.AppConfig;
 import ke.co.swahilibox.swahilibox.R;
 
 /**

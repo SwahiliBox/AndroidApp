@@ -1,10 +1,10 @@
-package ke.co.swahilibox.swahilibox;
+package ke.co.swahilibox.swahilibox.views;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import ke.co.swahilibox.swahilibox.helper.PrefManager;
+import ke.co.swahilibox.swahilibox.utils.PrefManager;
 
 
 public class Splash extends AppCompatActivity {

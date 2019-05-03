@@ -6,13 +6,20 @@ import android.util.Log;
 
 import com.parse.ParsePushBroadcastReceiver;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import java.util.List;
 
-import ke.co.swahilibox.swahilibox.Splash;
-import ke.co.swahilibox.swahilibox.database.SwahiliBoxDatasource;
-import ke.co.swahilibox.swahilibox.helper.NotificationUtils;
-import ke.co.swahilibox.swahilibox.model.Message;
+import ke.co.swahilibox.swahilibox.views.Splash;
+import ke.co.swahilibox.swahilibox.model.ApiService;
+import ke.co.swahilibox.swahilibox.utils.NotificationUtils;
+import ke.co.swahilibox.swahilibox.model.Messages;
+import ke.co.swahilibox.swahilibox.views.Main;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
 
 /**
  * Created by japheth on 11/16/15.
@@ -22,7 +29,7 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
     private final String TAG = CustomPushReceiver.class.getSimpleName();
 
     private NotificationUtils notificationUtils;
-    SwahiliBoxDatasource datasource;
+
 
     private Intent parseIntent;
 
@@ -34,30 +41,12 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
     @Override
     protected void onPushReceive(Context context, Intent intent) {
         super.onPushReceive(context, intent);
-        datasource = new SwahiliBoxDatasource(context);
-        datasource.open();
 
         if (intent == null)
             return;
 
-        try {
-            JSONObject json = new JSONObject(intent.getExtras().getString("com.parse.Data"));
-
-            Log.e(TAG, "Push received: " + json);
-
-            parseIntent = intent;
-
-            parsePushJson(context, json);
-
-        } catch (JSONException e) {
-            Log.e(TAG, "Push message json exception: " + e.getMessage());
-        }
-    }
-
-    @Override
-    protected void onPushDismiss(Context context, Intent intent) {
-        super.onPushDismiss(context, intent);
-        datasource.close();
+        Main main = new Main();
+        main.getData();
     }
 
     @Override
@@ -65,51 +54,58 @@ public class CustomPushReceiver extends ParsePushBroadcastReceiver {
         super.onPushOpen(context, intent);
     }
 
-    /**
-     * Parses the push notification json
-     *
-     * @param context
-     * @param json
-     */
-    private void parsePushJson(Context context, JSONObject json) {
+    private void parsePushJson() {
         try {
-            boolean isBackground = json.getBoolean("is_background");
-            JSONObject data = json.getJSONObject("data");
-            String title = data.getString("title");
-            String message = data.getString("message");
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://dummy.restapiexample.com")//fake data
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                    .build();
 
-            /**
-             * Create message object
-             * set attributes
-             * save it
-             */
-            Message mess = new Message();
-            mess.setMessage(message);
-            mess.setTitle(title);
+            ApiService apiService = retrofit.create(ApiService.class);
+            Observable<List<Messages>> observable = apiService.getMessages().subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread());
 
-            datasource.createNotification(mess);
+            observable.subscribe(new rx.Observer<List<Messages>>() {
 
-            Log.i(TAG, "Parsed JSON: " + title + message);
+                private String message;
+                private String title;
+                Context context;
 
-            if (!isBackground) {
-                Intent resultIntent = new Intent(context, Splash.class);
-                showNotificationMessage(context, title, message, resultIntent);
-            }
+                @Override
+                public void onCompleted() {
+                    //a callback when the task gets completed
+                }
 
-        } catch (JSONException e) {
-            Log.e(TAG, "Push message json exception: " + e.getMessage());
+                @Override
+                public void onError(Throwable e) {
+                    Log.e(TAG, "The Error is: " + e.getMessage());
+                }
+
+                @Override
+                public void onNext(List<Messages> messages) {
+
+                    //testing with fakedata
+
+                    for (int i = 0; i < messages.size(); i++) {
+                        title = messages.get(i).getName();
+                        message = messages.get(i).getSalary();
+
+
+                       //notification will be showed every time a new item appears
+                        Intent resultIntent = new Intent(context, Splash.class);
+                        showNotificationMessage(context, title, message, resultIntent);
+                    }
+
+                }
+            });
+
+
+        } catch (Exception e) {
+            Log.e(TAG, "Push message exception: " + e.getMessage());
         }
     }
 
-    /**
-     * Shows the notification message in the notification bar
-     * If the app is in background, launches the app
-     *
-     * @param context
-     * @param title
-     * @param message
-     * @param intent
-     */
     public void showNotificationMessage(Context context, String title, String message, Intent intent) {
 
         notificationUtils = new NotificationUtils(context);

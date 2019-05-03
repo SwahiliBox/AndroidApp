@@ -1,12 +1,10 @@
-package ke.co.swahilibox.swahilibox;
+package ke.co.swahilibox.swahilibox.utils;
 
 import android.app.Application;
 import android.util.Log;
 
 import com.parse.ParseACL;
 import com.parse.ParseUser;
-
-import ke.co.swahilibox.swahilibox.helper.ParseUtil;
 
 /**
  * Created by japheth on 11/16/15.
