@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "274119841360",
-    "firebase_url": "https://swahilibox-679fd.firebaseio.com",
-    "project_id": "swahilibox-679fd",
-    "storage_bucket": "swahilibox-679fd.appspot.com"
+    "project_number": "209445683946",
+    "firebase_url": "https://swahilibox-14e22.firebaseio.com",
+    "project_id": "swahilibox-14e22",
+    "storage_bucket": "swahilibox-14e22.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:274119841360:android:1b436423bc0276d1",
+        "mobilesdk_app_id": "1:209445683946:android:edca66d9a5cd5036",
         "android_client_info": {
-          "package_name": "ke.co.swahilibox.swahilibox"
+          "package_name": "com.sam.swahilibox"
         }
       },
       "oauth_client": [
         {
-          "client_id": "274119841360-j505jj2jovc2j40cfqqrkhv9q0v7279d.apps.googleusercontent.com",
+          "client_id": "209445683946-9elarf8jkuslcb8lhes36dnhm7k18iue.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "ke.co.swahilibox.swahilibox",
+            "package_name": "com.sam.swahilibox",
             "certificate_hash": "076cd1aa8cd77bd5b26ca5bcba1bc318adaec999"
           }
         },
         {
-          "client_id": "274119841360-5m6s10ovga5jecclbsjjdecava1tmdpo.apps.googleusercontent.com",
+          "client_id": "209445683946-fcivn0hgdnkgqg3n5saemfi3jl8nfc0r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyArG1i2aH88z4Hq83friBPyj0yw6FHpmk0"
+          "current_key": "AIzaSyAfXcJwhflXh3axQ79BOUFMeCy0bifrGvM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "274119841360-5m6s10ovga5jecclbsjjdecava1tmdpo.apps.googleusercontent.com",
+              "client_id": "209445683946-fcivn0hgdnkgqg3n5saemfi3jl8nfc0r.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
