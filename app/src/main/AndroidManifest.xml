@@ -1,86 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ke.co.swahilibox.swahilibox">
+    package="com.sam.swahilibox">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
-
-    <!-- permission needed to check app state background / foreground -->
-    <uses-permission android:name="android.permission.GET_TASKS" />
-
-    <permission
-        android:name="ke.co.swahilibox.swahilibox.permission.C2D_MESSAGE"
-        android:protectionLevel="signature" />
-
-    <uses-permission android:name="ke.co.swahilibox.swahilibox.permission.C2D_MESSAGE" />
 
     <application
-        android:name=".SwahiliBoxParse"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/launcher_icon"
         android:label="@string/app_name"
+        android:roundIcon="@drawable/launcher_icon"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".Splash"
-            android:label="@string/app_name"
-            android:theme="@style/SplashTheme"
-            android:windowSoftInputMode="stateHidden|adjustResize">
+        <activity android:name=".LogIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Main"
-            android:label="@string/title_activity_main"
-            android:launchMode="singleTop"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".SignUp"
-            android:label="@string/title_activity_sign_up"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".LogIn"
-            android:label="@string/title_activity_log_in"
-            android:theme="@style/AppTheme" />
-
-        <!-- Added for Parse push notifications -->
-
-        <service android:name="com.parse.PushService" />
-
-        <receiver
-            android:name=".receiver.CustomPushReceiver"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.intent.action.USER_PRESENT" />
-                <action android:name="com.parse.push.intent.RECEIVE" />
-                <action android:name="com.parse.push.intent.DELETE" />
-                <action android:name="com.parse.push.intent.OPEN" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="com.parse.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND">
-            <intent-filter>
-                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-
-                <category android:name="ke.co.swahilibox.swahilibox" />
-            </intent-filter>
-        </receiver>
-
         <!-- /Added for Parse push notifications -->
         <activity
             android:name=".AboutUs"
             android:label="@string/title_activity_about_us"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".Alerts"
+            android:label="@string/title_activity_message"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity> <!-- Id service -->
+        <service android:name=".fcm.FirebaseInstanceIdService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service> <!-- Service listening for any incoming messages -->
+        <service android:name=".fcm.FirebaseMessageService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".fcm.NotificationJobService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
+            </intent-filter>
+        </service>
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+        <activity
+            android:name="com.facebook.CustomTabActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="@string/fb_login_protocol_scheme" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

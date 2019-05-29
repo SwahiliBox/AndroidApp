@@ -1,30 +1,31 @@
 <resources>
-    <string name="app_name">SwahiliBox</string>
-    <string name="title_activity_main">Alerts</string>
-    <string name="nav_setting">Setting</string>
-    <string name="nav_invite">Invite Friends</string>
-    <string name="nav_about_us">About Us</string>
-    <string name="log_in">Log In</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="nav_log_out">Log Out</string>
-    <string name="drawer_open">Open</string>
-    <string name="drawer_close">Close</string>
-    <string name="title_activity_login">Sign in</string>
-    <string name="delete_message">Delete</string>
+    <string name="app_name">swahilibox</string>
+    <string name="title_activity_message">Alerts</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
     <string name="title_activity_sign_up">SignUp</string>
     <string name="title_activity_log_in">LogIn</string>
     <string name="title_activity_about_us">AboutUS</string>
+
+    <string name="nav_setting">Setting</string>
+    <string name="nav_invite">Invite Friends</string>
+    <string name="nav_about_us">About Us</string>
+    <string name="nav_log_out">Log Out</string>
+    <string name="delete_all_notification">Delete All Notification</string>
+
+    //facebook ids
+    <string name="facebook_app_id">294662301472915</string>
+    <string name="fb_login_protocol_scheme">fb294662301472915</string>
 </resources>
